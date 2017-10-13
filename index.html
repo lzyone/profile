@@ -564,22 +564,22 @@
 		</div>
 		<div class="choose animate-box">
 			<h2>Contact</h2>
-			<form action="http://api.graytech.org/profile/contact">
+			<form id="formContact" action="http://api.graytech.org/profile/contact">
 				<div class="row form-group">
 					<div class="col-md-6">
-						<input type="text" id="name" class="form-control" placeholder="Your name">
+						<input type="text" name="name" id="name" class="form-control" placeholder="Your name">
 					</div>
 				</div>
 
 				<div class="row form-group">
 					<div class="col-md-12">
-						<input type="text" id="email" class="form-control" placeholder="Your email address">
+						<input type="text" name="email" id="email" class="form-control" placeholder="Your email address">
 					</div>
 				</div>
 
 				<div class="row form-group">
 					<div class="col-md-12">
-						<input type="text" id="subject" class="form-control" placeholder="Your subject of this message">
+						<input type="text" name="subject" id="subject" class="form-control" placeholder="Your subject of this message">
 					</div>
 				</div>
 
@@ -589,7 +589,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<input type="submit" value="Send Message" class="btn btn-primary">
+					<input type="button" onclick="setContact()" value="Send Message" class="btn btn-primary">
 				</div>
 
 			</form>	
@@ -631,6 +631,25 @@
 	
 	<!-- Main -->
 	<script src="js/main.js"></script>
+
+    <script type="text/javascript">
+        function setContact() {
+            $.ajax({
+            cache: true,
+            dateType: "jsonp",
+            type: "POST",
+            url: "http://api.graytech.org/profile/contact",
+            data:$('#formContact').serialize(),// 你的formid
+            async: false,
+            error: function(request) {
+                alert("error");
+            },
+            success: function(data) {
+                alert("success");
+            }
+            });
+        }
+    </script>
 
 	</body>
 </html>
